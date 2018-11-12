@@ -7,10 +7,9 @@ namespace TankGame
 {
     public class Health : MonoBehaviour, IDamageReceiver
     {
-        [SerializeField] private float _maxHealth;
-        [SerializeField] private HUD _hud;
+        [SerializeField]
+        private int _currentHealth, _maxHealth = 100;
 
-        private float _currentHealth;
 
         void Start()
         {
@@ -19,19 +18,19 @@ namespace TankGame
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.K))
+            if (Input.GetKeyDown(KeyCode.P))
             {
-                TakeDamage(10);
+                TakeDamage(20);
             }
+            
         }
 
         public void TakeDamage(int amount)
         {
             _currentHealth -= amount;
-
-            if(_hud != null)
+            if(_currentHealth <= 0)
             {
-                _hud.UpdateHealthDisplay(_maxHealth, _currentHealth);
+                Gamemanager.Instance.PlayerDied();
             }
         }
     }
