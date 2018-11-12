@@ -43,7 +43,7 @@ namespace TankGame
             if(projectile != null)
             {
                 projectile.transform.position = _shootingPoint.position;
-                projectile.Launch(transform.forward);
+                projectile.Launch(_shootingPoint.forward);
                 _canShoot = false;
             }
 

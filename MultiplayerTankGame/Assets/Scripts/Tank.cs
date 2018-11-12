@@ -40,7 +40,7 @@ namespace TankGame
         /// After unit respawns place it to the position it was in the start of the game and set it health to starting health.
         /// </summary>
 
-        public virtual void Init()
+        public void Start()
         {
             _mover = gameObject.GetOrAddComponent<TransformMover>();
 
