@@ -7,11 +7,31 @@ namespace TankGame
 {
     public class Health : MonoBehaviour, IDamageReceiver
     {
-        private int _currentHealth;
+        [SerializeField]
+        private int _currentHealth, _maxHealth = 100;
 
-        void IDamageReceiver.TakeDamage(int amount)
+
+        void Start()
+        {
+            _currentHealth = _maxHealth;
+        }
+
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                TakeDamage(20);
+            }
+            
+        }
+
+        public void TakeDamage(int amount)
         {
             _currentHealth -= amount;
+            if(_currentHealth <= 0)
+            {
+                Gamemanager.Instance.PlayerDied();
+            }
         }
     }
 }

@@ -42,11 +42,11 @@ namespace TankGame
 
         public void Start()
         {
+            Gamemanager.Instance.player = this;
             _mover = gameObject.GetOrAddComponent<TransformMover>();
-
             Mover.Init(moveSpeed, turnSpeed);
-
             Weapon = GetComponentInChildren<Weapon>();
+
             if (Weapon != null)
             {
                 Weapon.Init(gameObject);
@@ -74,5 +74,7 @@ namespace TankGame
             float turn = Input.GetAxis(horizontalAxis);
             return new Vector3(turn, 0, Movement);
         }
+
+      
     }
 }
