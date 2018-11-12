@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224143810855454842}
   - component: {fileID: 222869702092344700}
   - component: {fileID: 114374815500387304}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4975449668883936}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BarrelEnd
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 33342610167664570}
   - component: {fileID: 23437438747751598}
   - component: {fileID: 136503611544628712}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: BackWheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,8 @@ GameObject:
   - component: {fileID: 33658923726954874}
   - component: {fileID: 23478325356470138}
   - component: {fileID: 65971521203034628}
-  m_Layer: 0
+  - component: {fileID: 114589513092873626}
+  m_Layer: 9
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +91,7 @@ GameObject:
   - component: {fileID: 33864388105923408}
   - component: {fileID: 23117470961545394}
   - component: {fileID: 136531414307474060}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +106,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4071030883422006}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ModelHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +124,7 @@ GameObject:
   - component: {fileID: 33053894674739098}
   - component: {fileID: 23120458944625402}
   - component: {fileID: 136557496056106966}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Front Wheels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +143,7 @@ GameObject:
   - component: {fileID: 114307629192536180}
   - component: {fileID: 114865862998485748}
   - component: {fileID: 114620042681226252}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: HitPointDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -161,7 +162,7 @@ GameObject:
   - component: {fileID: 23186492168215928}
   - component: {fileID: 136846751517388754}
   - component: {fileID: 114304464280064946}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +180,7 @@ GameObject:
   - component: {fileID: 114270920210461844}
   - component: {fileID: 114676584241284702}
   - component: {fileID: 114389321605346566}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,6 +611,17 @@ MonoBehaviour:
   _hud: {fileID: 0}
   _hitPointDisplay: {fileID: 114620042681226252}
   _isLocalPlayer: 1
+--- !u!114 &114589513092873626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264361507882732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f505a39e67e1264db3268fa63288d15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114620042681226252
 MonoBehaviour:
   m_ObjectHideFlags: 1
