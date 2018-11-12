@@ -470,6 +470,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 4975449668883936, guid: c55669a93d80c1344bb750dffcb9fb94, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.53
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c55669a93d80c1344bb750dffcb9fb94, type: 2}
   m_IsPrefabParent: 0
