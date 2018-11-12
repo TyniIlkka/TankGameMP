@@ -26,6 +26,9 @@ namespace TankGame
 
         private System.Action< Projectile > _collisionCallback;
 
+        public float flyTime = 2;
+        private float _flyTimer;
+
         public Rigidbody Rigidbody
         {
             get
@@ -36,6 +39,18 @@ namespace TankGame
                     _rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
                 }
                 return _rigidbody;
+            }
+        }
+
+        public void Update()
+        {
+            if(_flyTimer > 0)
+            {
+                _flyTimer -= Time.deltaTime;
+            } else
+            {
+                _flyTimer = flyTime;
+                _collisionCallback(this);
             }
         }
 

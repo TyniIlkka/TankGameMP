@@ -48,8 +48,8 @@ namespace TankGame
         IEnumerator RespawnTimer(float respawnTime)
         {
             yield return new WaitForSeconds(respawnTime);
-            Debug.Log("Timer ends");
             player.gameObject.SetActive(true);
+            player.Respawn();
         }
 
     }

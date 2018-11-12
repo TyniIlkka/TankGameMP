@@ -42,6 +42,7 @@ namespace TankGame
 
         public void Start()
         {
+            Health = GetComponent<Health>();
             Gamemanager.Instance.player = this;
             _mover = gameObject.GetOrAddComponent<TransformMover>();
             Mover.Init(moveSpeed, turnSpeed);
@@ -73,6 +74,11 @@ namespace TankGame
             float Movement = Input.GetAxis(verticalAxis);
             float turn = Input.GetAxis(horizontalAxis);
             return new Vector3(turn, 0, Movement);
+        }
+
+        public void Respawn()
+        {
+            Health.TakeDamage(-100);
         }
 
       
