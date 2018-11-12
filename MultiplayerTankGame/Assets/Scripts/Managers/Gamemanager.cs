@@ -39,17 +39,18 @@ namespace TankGame
             }
         }
 
-        public void PlayerDied()
+        public void PlayerDied(Tank tank)
         {
-            player.gameObject.SetActive(false);
-            StartCoroutine(RespawnTimer(_deathTime));
+            tank.gameObject.SetActive(false);
+            StartCoroutine(RespawnTimer(_deathTime, tank));
         }
 
-        IEnumerator RespawnTimer(float respawnTime)
+        IEnumerator RespawnTimer(float respawnTime, Tank tank)
         {
             yield return new WaitForSeconds(respawnTime);
             Debug.Log("Timer ends");
-            player.gameObject.SetActive(true);
+            tank.gameObject.SetActive(true);
+            tank.Health.Initialize();
         }
 
     }

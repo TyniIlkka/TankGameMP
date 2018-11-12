@@ -36,6 +36,9 @@ namespace TankGame
 
         public Health Health { get; protected set; }
 
+
+        public bool _isLocalPlayer;
+
         /// <summary>
         /// After unit respawns place it to the position it was in the start of the game and set it health to starting health.
         /// </summary>
@@ -46,6 +49,8 @@ namespace TankGame
             _mover = gameObject.GetOrAddComponent<TransformMover>();
             Mover.Init(moveSpeed, turnSpeed);
             Weapon = GetComponentInChildren<Weapon>();
+            Health = GetComponent<Health>();
+            Health.Initialize();
 
             if (Weapon != null)
             {
@@ -58,6 +63,8 @@ namespace TankGame
 
         protected void Update()
         {
+            if (!_isLocalPlayer) return;
+
             var input = PlayerInput();
             Mover.Turn(input.x);
             Mover.Move(input.z);
