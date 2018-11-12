@@ -61,7 +61,7 @@ namespace TankGame
             var input = PlayerInput();
             Mover.Turn(input.x);
             Mover.Move(input.z);
-            bool shoot = Input.GetButton("Fire1");
+            bool shoot = Input.GetButton("Jump");
             if (shoot)
             {
                 Weapon.Shoot();
