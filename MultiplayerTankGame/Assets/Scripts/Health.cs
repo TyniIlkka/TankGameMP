@@ -64,5 +64,6 @@ namespace TankGame
             _hud.UpdateHealthDisplay(_maxHealth, _currentHealth);
 
         }
+
     }
 }

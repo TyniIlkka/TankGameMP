@@ -24,7 +24,7 @@ namespace TankGame
         public void Init (GameObject owner)
         {
             _owner = owner;
-            _projectiles = new Pool<Projectile>(4, false, _projectilePrefab, InitProjectile );
+            _projectiles = new Pool<Projectile>(4, true, _projectilePrefab, InitProjectile );
         }
 
         private void InitProjectile( Projectile projectile)

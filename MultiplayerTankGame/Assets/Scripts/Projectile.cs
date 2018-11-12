@@ -68,24 +68,19 @@ namespace TankGame
         protected void OnCollisionEnter( Collision collision )
         {
             //TODO: Add particle effects.
-            ApplyDamage();
+            IDamageReceiver receiver = collision.gameObject.GetComponentInParent<IDamageReceiver>();
+            if(receiver != null)
+            {
+                ApplyDamage(receiver);
+            }
             Rigidbody.velocity = Vector3.zero;
             _collisionCallback(this);
         }
 
-        private void ApplyDamage()
+        private void ApplyDamage(IDamageReceiver damageReceiver)
         {
-            List<IDamageReceiver> alreadyDamaged = new List<IDamageReceiver>();
-            Collider[] damageReceivers = Physics.OverlapSphere(transform.position, explosionRadius, _hitMask);
-            for(int i = 0; i < damageReceivers.Length; i++)
-            {
-                IDamageReceiver damageReceiver = damageReceivers[i].GetComponentInParent<IDamageReceiver>();
-                if(damageReceiver != null && !alreadyDamaged.Contains(damageReceiver))
-                {
-                    alreadyDamaged.Add(damageReceiver);
-                    damageReceiver.TakeDamage(_damage);
-                }
-            }
+            damageReceiver.TakeDamage(_damage);
         }
+        
     }
 }
