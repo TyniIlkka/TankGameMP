@@ -55,7 +55,7 @@ namespace TankGame
 
             if (Weapon != null)
             {
-                Weapon.Init(gameObject);
+                Weapon.Init(this);
             }
 
             _spawnPosition = transform.position;

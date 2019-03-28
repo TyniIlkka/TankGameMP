@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TankGame
 {
-    public class Weapon: MonoBehaviour
+    public class Weapon : MonoBehaviour
     {
         [SerializeField]
         private Projectile _projectilePrefab;
@@ -16,34 +16,27 @@ namespace TankGame
         [SerializeField]
         private Transform _shootingPoint;
 
-        private Pool<Projectile> _projectiles;
-        private GameObject _owner;
+        private Tank _owner;
         private bool _canShoot = true;
         private float _firingTimer = 0;
 
-        public void Init (GameObject owner)
+        public void Init(Tank owner)
         {
             _owner = owner;
-            _projectiles = new Pool<Projectile>(4, true, _projectilePrefab, InitProjectile );
         }
 
-        private void InitProjectile( Projectile projectile)
-        {
-            projectile.Init(ProjectileHit);
-        }
 
-        public bool Shoot ()
+        public bool Shoot()
         {
-            if(!_canShoot)
+            if (!_canShoot)
             {
                 return false;
             }
 
-            Projectile projectile = _projectiles.GetPooledObject();
-            if(projectile != null)
+            Projectile projectile = Instantiate(_projectilePrefab, _shootingPoint.position, Quaternion.identity);
+            if (projectile != null)
             {
-                projectile.transform.position = _shootingPoint.position;
-                projectile.Launch(_shootingPoint.forward);
+                projectile.Launch(_shootingPoint.forward, _owner.Health);
                 _canShoot = false;
             }
 
@@ -57,10 +50,10 @@ namespace TankGame
 
         private void UpdateFiringTimer()
         {
-            if(!_canShoot)
+            if (!_canShoot)
             {
                 _firingTimer += Time.deltaTime;
-                if(_firingTimer >= _firingRate)
+                if (_firingTimer >= _firingRate)
                 {
                     _canShoot = true;
                     _firingTimer = 0;
@@ -68,12 +61,5 @@ namespace TankGame
             }
         }
 
-        private void ProjectileHit (Projectile projectile)
-        {
-            if(!_projectiles.ReturnObject(projectile))
-            {
-                Debug.LogError("Could not return projectile back to the pool! ");
-            }
-        }
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TankGame
 {
-    public class Projectile: MonoBehaviour
+    public class Projectile : MonoBehaviour
     {
         [SerializeField]
         private int _damage;
@@ -24,16 +24,18 @@ namespace TankGame
         private Weapon _weapon;
         private Rigidbody _rigidbody;
 
-        private System.Action< Projectile > _collisionCallback;
-
         public float flyTime = 2;
         private float _flyTimer;
+
+        private bool _initialized;
+
+        private IDamageReceiver self;
 
         public Rigidbody Rigidbody
         {
             get
             {
-                if(_rigidbody == null)
+                if (_rigidbody == null)
                 {
                     _rigidbody = gameObject.GetOrAddComponent<Rigidbody>();
                     _rigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
@@ -44,43 +46,47 @@ namespace TankGame
 
         public void Update()
         {
-            if(_flyTimer > 0)
+            if (!_initialized) return;
+
+            if (_flyTimer > 0)
             {
                 _flyTimer -= Time.deltaTime;
-            } else
+            }
+            else
             {
-                _flyTimer = flyTime;
-                _collisionCallback(this);
+                Destroy(gameObject);
             }
         }
 
-        public void Init (System.Action< Projectile> collisionCallback)
-        {
-            _collisionCallback = collisionCallback;
-        }
-
-        public void Launch (Vector3 direction)
+        public void Launch(Vector3 direction, IDamageReceiver shooter)
         {
             //TODO: Add particle effects.
+            _flyTimer = flyTime;
+            self = shooter;
+            GetComponent<SphereCollider>().enabled = true;
             Rigidbody.AddForce(direction.normalized * _shootingForce, ForceMode.Impulse);
+            _initialized = true;
         }
 
-        protected void OnCollisionEnter( Collision collision )
+        protected void OnTriggerEnter(Collider collision)
         {
-            //TODO: Add particle effects.
+            if (self == null) return;
+
             IDamageReceiver receiver = collision.gameObject.GetComponentInParent<IDamageReceiver>();
-            if(receiver != null)
+            if (receiver == self) return;
+
+            if (receiver != null)
             {
                 ApplyDamage(receiver);
             }
-            Rigidbody.velocity = Vector3.zero;
-            _collisionCallback(this);
+
+            Destroy(gameObject);
         }
 
         private void ApplyDamage(IDamageReceiver damageReceiver)
         {
             damageReceiver.TakeDamage(_damage);
         }
-        
+
     }
 }
