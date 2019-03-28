@@ -48,11 +48,6 @@ namespace TankGame
             if (_knockedBack) return;
 
             Vector3 direction = target - transform.position;
-            //direction.y = transform.position.y;
-            //direction = direction.normalized;
-            //float turnSpeedRad = Mathf.Deg2Rad * turnSpeed * Time.deltaTime;
-            //Vector3 rotation = Vector3.RotateTowards(transform.forward, direction,turnSpeedRad,0);
-            //transform.rotation = Quaternion.LookRotation(rotation, transform.up);
             Quaternion targetRotation = Quaternion.LookRotation(direction, Vector3.up);
             transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, turnSpeed * Time.deltaTime);
         }
