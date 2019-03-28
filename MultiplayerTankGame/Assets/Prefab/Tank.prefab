@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224143810855454842}
   - component: {fileID: 222869702092344700}
   - component: {fileID: 114374815500387304}
+  - component: {fileID: 114804373844322658}
   m_Layer: 9
   m_Name: HealthBar
   m_TagString: Untagged
@@ -73,6 +74,7 @@ GameObject:
   - component: {fileID: 23478325356470138}
   - component: {fileID: 65971521203034628}
   - component: {fileID: 114589513092873626}
+  - component: {fileID: 54878358312257642}
   m_Layer: 9
   m_Name: Base
   m_TagString: Untagged
@@ -180,6 +182,7 @@ GameObject:
   - component: {fileID: 114270920210461844}
   - component: {fileID: 114676584241284702}
   - component: {fileID: 114389321605346566}
+  - component: {fileID: 114572770147495792}
   m_Layer: 9
   m_Name: Tank
   m_TagString: Untagged
@@ -249,7 +252,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1949782201302910}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 9.96, y: 0, z: 4.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4071030883422006}
@@ -293,7 +296,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1053057783669680}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0, y: -1.65, z: -0}
+  m_LocalPosition: {x: -0, y: -1.53, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4005304964631956}
@@ -314,7 +317,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 1b6a9141a6ff5fb4ba23d03d4335e443, type: 2}
+  - {fileID: 2100000, guid: 156a5501ff753cc4f80a9df60a873fa4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -349,7 +352,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 1b6a9141a6ff5fb4ba23d03d4335e443, type: 2}
+  - {fileID: 2100000, guid: 156a5501ff753cc4f80a9df60a873fa4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -384,7 +387,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 1b6a9141a6ff5fb4ba23d03d4335e443, type: 2}
+  - {fileID: 2100000, guid: 156a5501ff753cc4f80a9df60a873fa4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -419,7 +422,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 1b6a9141a6ff5fb4ba23d03d4335e443, type: 2}
+  - {fileID: 2100000, guid: 156a5501ff753cc4f80a9df60a873fa4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -509,6 +512,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1322009420053768}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &54878358312257642
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1264361507882732}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!65 &65971521203034628
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -608,9 +626,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHealth: 0
   _maxHealth: 100
-  _hud: {fileID: 0}
+  _hud: {fileID: 114804373844322658}
   _hitPointDisplay: {fileID: 114620042681226252}
   _isLocalPlayer: 1
+--- !u!114 &114572770147495792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1949782201302910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4216c7150b6130409aa0f6bcde30348, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114589513092873626
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -651,6 +680,18 @@ MonoBehaviour:
   turnSpeed: 180
   _startingHealth: 100
   _isLocalPlayer: 1
+--- !u!114 &114804373844322658
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1005812063804952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0b89ea3fbfe384d851aa38396cd352, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _healthBar: {fileID: 114374815500387304}
 --- !u!114 &114865862998485748
 MonoBehaviour:
   m_ObjectHideFlags: 1
