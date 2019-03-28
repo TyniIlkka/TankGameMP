@@ -24,7 +24,10 @@ namespace TankGame
 
         void Update()
         {
-
+            if(_isLocalPlayer && Input.GetKeyDown(KeyCode.P))
+            {
+                TakeDamage(20);
+            }
         }
 
         public void Initialize()
