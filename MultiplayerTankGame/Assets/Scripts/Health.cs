@@ -3,62 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 namespace TankGame
 {
-    public class Health : MonoBehaviour, IDamageReceiver
+    public class Health : NetworkBehaviour, IDamageReceiver
     {
         [SerializeField]
-        private int _currentHealth, _maxHealth = 100;
+        private int _maxHealth = 100;
         [SerializeField] private HUD _hud;
         [SerializeField] private HitPointDisplay _hitPointDisplay;
 
-        public bool _isLocalPlayer;
+        [SyncVar(hook = "OnChangeHealth")]
+        private int _currentHealth;
 
         private Tank _tank;
 
-        void Start()
+        public override void OnStartClient()
         {
-            Initialize();
+            if (isServer)
+                _currentHealth = _maxHealth;
+
+            _tank = GetComponentInParent<Tank>();
+            OnChangeHealth(_currentHealth);
+        }
+
+        public override void OnStartLocalPlayer()
+        {
+            _hud = GetComponentInChildren<HUD>();
+            _hud.UpdateHealthDisplay(_maxHealth, _currentHealth);
+            _hitPointDisplay.GetComponent<Canvas>().enabled = false;
         }
 
         void Update()
         {
-            if(_isLocalPlayer && Input.GetKeyDown(KeyCode.P))
+            if(isLocalPlayer && Input.GetKeyDown(KeyCode.P))
             {
                 TakeDamage(20);
             }
         }
 
-        public void Initialize()
+        void OnChangeHealth(int health)
         {
-            _tank = GetComponentInParent<Tank>();
-            _currentHealth = _maxHealth;
-            _hitPointDisplay.UpdateHealthBar(_maxHealth, _currentHealth);
+            _currentHealth = health;
 
-            if (_isLocalPlayer)
-            {
-                _hud.UpdateHealthDisplay(_maxHealth, _currentHealth);
-                _hitPointDisplay.GetComponent<Canvas>().enabled = false;
-            }
-        }
-
-        public void TakeDamage(int amount)
-        {
-            _currentHealth -= amount;
-
-            Debug.Log(_currentHealth);
-            if(_currentHealth <= 0)
+            if(health <= 0)
             {
                 Gamemanager.Instance.PlayerDied(_tank);
             }
 
-            _hitPointDisplay.UpdateHealthBar(_maxHealth, _currentHealth);
+            _hitPointDisplay.UpdateHealthBar(_maxHealth, health);
 
-            if (!_isLocalPlayer) return;
+            if (isLocalPlayer && _hud)
+                _hud.UpdateHealthDisplay(_maxHealth, health);
+        }
+        
+        public void TakeDamage(int amount)
+        {
+            CmdTakeDamage(amount);
+        }
 
-            _hud.UpdateHealthDisplay(_maxHealth, _currentHealth);
-
+        [Command]
+        private void CmdTakeDamage(int amout)
+        {
+            _currentHealth -= amout;
         }
 
     }

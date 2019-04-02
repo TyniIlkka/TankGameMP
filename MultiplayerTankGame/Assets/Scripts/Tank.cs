@@ -51,7 +51,6 @@ namespace TankGame
             Mover.Init(moveSpeed, turnSpeed);
             Weapon = GetComponentInChildren<Weapon>();
             Health = GetComponent<Health>();
-            Health.Initialize();
 
             if (Weapon != null)
             {
