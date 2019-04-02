@@ -42,14 +42,20 @@ namespace TankGame
         /// </summary>
         void LateUpdate()
         {
-            float angle = Mathf.Deg2Rad * _angle;
-            // Calculates A from C * Angle
-            float y = Mathf.Sin(angle) * _distance;
-            // Calculate B from A^2 * C ^ 2
-            float x = Mathf.Sqrt(_distance * _distance - y * y);
-            Vector3 offset = new Vector3(0, y, 0);
-            transform.position = _targetTransform.position + -_targetTransform.forward*x + offset;
-            Rotate(_targetTransform.position);
+
+            if (_targetTransform)
+            {
+                float angle = Mathf.Deg2Rad * _angle;
+                // Calculates A from C * Angle
+                float y = Mathf.Sin(angle) * _distance;
+                // Calculate B from A^2 * C ^ 2
+                float x = Mathf.Sqrt(_distance * _distance - y * y);
+                Vector3 offset = new Vector3(0, y, 0);
+                transform.position = _targetTransform.position + -_targetTransform.forward * x + offset;
+                Rotate(_targetTransform.position);
+            }
+            else if (Gamemanager.Instance.player)
+                _targetTransform = Gamemanager.Instance.player.transform;
         }
 
         /// <summary>

@@ -183,6 +183,7 @@ GameObject:
   - component: {fileID: 114389321605346566}
   - component: {fileID: 114572770147495792}
   - component: {fileID: 114715005345706194}
+  - component: {fileID: 114396188741026804}
   m_Layer: 9
   m_Name: Tank
   m_TagString: Untagged
@@ -614,6 +615,38 @@ MonoBehaviour:
   _hud: {fileID: 0}
   _hitPointDisplay: {fileID: 114620042681226252}
   _isLocalPlayer: 1
+--- !u!114 &114396188741026804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1949782201302910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 197
+    i1: 86
+    i2: 105
+    i3: 169
+    i4: 61
+    i5: 128
+    i6: 193
+    i7: 52
+    i8: 75
+    i9: 183
+    i10: 80
+    i11: 223
+    i12: 252
+    i13: 185
+    i14: 251
+    i15: 148
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114572770147495792
 MonoBehaviour:
   m_ObjectHideFlags: 1
