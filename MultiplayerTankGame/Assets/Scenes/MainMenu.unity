@@ -413,7 +413,8 @@ MonoBehaviour:
   m_PlayerSpawnMethod: 0
   m_OfflineScene: MainMenu
   m_OnlineScene: Tank Platform
-  m_SpawnPrefabs: []
+  m_SpawnPrefabs:
+  - {fileID: 1126123075416306, guid: ad49d608aab0e5b43ad53e375eea92b3, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:

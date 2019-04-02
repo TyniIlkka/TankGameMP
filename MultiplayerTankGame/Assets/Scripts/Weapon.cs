@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace TankGame
 {
-    public class Weapon : MonoBehaviour
+    public class Weapon : NetworkBehaviour
     {
         [SerializeField]
         private Projectile _projectilePrefab;
@@ -17,7 +18,7 @@ namespace TankGame
         private Transform _shootingPoint;
 
         private Tank _owner;
-        private bool _canShoot = true;
+        public bool _canShoot = true;
         private float _firingTimer = 0;
 
         public void Init(Tank owner)
@@ -26,21 +27,16 @@ namespace TankGame
         }
 
 
-        public bool Shoot()
+        [Command]
+        public void CmdShoot()
         {
-            if (!_canShoot)
-            {
-                return false;
-            }
 
             Projectile projectile = Instantiate(_projectilePrefab, _shootingPoint.position, Quaternion.identity);
             if (projectile != null)
             {
-                projectile.Launch(_shootingPoint.forward, _owner.Health);
-                _canShoot = false;
+                NetworkServer.Spawn(projectile.gameObject);
+                projectile.RpcLaunch(_shootingPoint.forward, _owner.gameObject);
             }
-
-            return projectile != null;
         }
 
         protected virtual void Update()

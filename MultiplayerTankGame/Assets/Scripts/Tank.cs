@@ -74,9 +74,10 @@ namespace TankGame
             Mover.Turn(input.x);
             Mover.Move(input.z);
             bool shoot = Input.GetButton("Jump");
-            if (shoot)
+            if (shoot && Weapon._canShoot)
             {
-                Weapon.Shoot();
+                Weapon.CmdShoot();
+                Weapon._canShoot = false;
             }
         }
 

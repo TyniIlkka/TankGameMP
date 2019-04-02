@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace TankGame
 {
-    public class Projectile : MonoBehaviour
+    public class Projectile : NetworkBehaviour
     {
         [SerializeField]
         private int _damage;
@@ -54,23 +55,27 @@ namespace TankGame
             }
             else
             {
+                NetworkServer.UnSpawn(this.gameObject);
                 Destroy(gameObject);
             }
         }
 
-        public void Launch(Vector3 direction, IDamageReceiver shooter)
+        [ClientRpc]
+        public void RpcLaunch(Vector3 direction, GameObject shooter)
         {
             //TODO: Add particle effects.
             _flyTimer = flyTime;
-            self = shooter;
+            self = shooter.GetComponent<IDamageReceiver>();
             GetComponent<SphereCollider>().enabled = true;
             Rigidbody.AddForce(direction.normalized * _shootingForce, ForceMode.Impulse);
-            _initialized = true;
+
+            if(isServer)
+                _initialized = true;
         }
 
         protected void OnTriggerEnter(Collider collision)
         {
-            if (self == null) return;
+            if (self == null || !isServer) return;
 
             IDamageReceiver receiver = collision.gameObject.GetComponentInParent<IDamageReceiver>();
             if (receiver == self) return;
@@ -80,6 +85,7 @@ namespace TankGame
                 ApplyDamage(receiver);
             }
 
+            NetworkServer.UnSpawn(this.gameObject);
             Destroy(gameObject);
         }
 
