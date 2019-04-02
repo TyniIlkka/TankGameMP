@@ -719,6 +719,7 @@ MonoBehaviour:
   moveSpeed: 5
   turnSpeed: 180
   _startingHealth: 100
+  myMaterial: {fileID: 2100000, guid: 36db5cd60c6f3274180b48b942e3e544, type: 2}
 --- !u!114 &114715005345706194
 MonoBehaviour:
   m_ObjectHideFlags: 1
