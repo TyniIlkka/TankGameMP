@@ -25,7 +25,7 @@ namespace TankGame
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.layer == LayerMask.NameToLayer("Tank") && _myPlayer._isLocalPlayer)
+            if(collision.gameObject.layer == LayerMask.NameToLayer("Tank") && _myPlayer.isLocalPlayer)
             {
                 Vector3 direction = Vector3.Normalize(transform.position - collision.transform.position);
                 direction.y = 0;

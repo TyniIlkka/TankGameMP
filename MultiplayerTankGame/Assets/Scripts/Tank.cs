@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
 namespace TankGame
 {
-    public class Tank : MonoBehaviour
+    public class Tank : NetworkBehaviour
     {
 
         [SerializeField]
@@ -23,6 +24,8 @@ namespace TankGame
 
         private Vector3 _spawnPosition;
 
+        public Material myMaterial;
+
         public Weapon Weapon
         {
             get;
@@ -35,9 +38,6 @@ namespace TankGame
         }
 
         public Health Health { get; protected set; }
-
-
-        public bool _isLocalPlayer;
 
         /// <summary>
         /// After unit respawns place it to the position it was in the start of the game and set it health to starting health.
@@ -60,11 +60,15 @@ namespace TankGame
 
             _spawnPosition = transform.position;
         }
-        
 
+        public override void OnStartLocalPlayer()
+        {
+            GetComponentInChildren<MeshRenderer>().material = myMaterial;
+        }
+        
         protected void Update()
         {
-            if (!_isLocalPlayer) return;
+            if (!isLocalPlayer) return;
 
             var input = PlayerInput();
             Mover.Turn(input.x);
